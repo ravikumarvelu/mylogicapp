@@ -36,12 +36,12 @@ jobs:
         uses: actions/checkout@v4
       - name: zip the logic app
         run: zip -r logicapp.zip . -x ".git/*" ".github/*" "README.md"
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.CLIENT_ID }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          subscription-id: ${{ secrets.SUB_ID }}
+      # - name: Login to Azure
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.CLIENT_ID }}
+      #     tenant-id: ${{ secrets.TENANT_ID }}
+      #     subscription-id: ${{ secrets.SUB_ID }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
@@ -50,4 +50,5 @@ jobs:
           app-name: 'myapp7007'
           slot-name: 'Production'
           package: logicapp.zip
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           
