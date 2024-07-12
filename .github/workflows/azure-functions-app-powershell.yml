@@ -48,7 +48,7 @@ jobs:
         id: fa
         with:
           app-name: 'myapp7007'
-          slot-name: 'Production'
+          # slot-name: 'Production'
           package: logicapp.zip
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           
