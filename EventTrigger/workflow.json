@@ -21,7 +21,7 @@
             "Recurrence": {
                 "recurrence": {
                     "frequency": "Day",
-                    "interval": 10
+                    "interval": 2
                 },
                 "type": "Recurrence"
             }
