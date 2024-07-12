@@ -29,9 +29,6 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
     steps:
@@ -42,9 +39,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0CA5AAFE4E90475FBC296923DEA0B28D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_15E68ACCEF464BC28A97C2AE1E44EDBC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A639F4FD8DFE4B3C8AF94001C2152418 }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUB_ID }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
