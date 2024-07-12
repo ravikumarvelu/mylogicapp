@@ -27,18 +27,8 @@ env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'logicapp.zip'       # set this to the path to your function app project, defaults to the repository root
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest # For Linux, use ubuntu-latest
-    environment: dev
-    steps:
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@v4
-    - name: zip the logic app
-      run: zip -r logicapp.zip . -x ".git/*" ".github/*" "README.md"
-
-
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
