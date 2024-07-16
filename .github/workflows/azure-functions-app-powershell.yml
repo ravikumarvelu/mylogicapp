@@ -39,6 +39,5 @@ jobs:
       - uses: azure/appservice-settings@v1
         with:
           app-name: 'mylogicapp7007'
-          mask-inputs: false
           app-settings-json: ${{vars.CONFIG}}
-        id: settings
+        
