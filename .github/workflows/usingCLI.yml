@@ -1,0 +1,38 @@
+name: Deploy PowerShell project to Azure Function App
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  AZURE_FUNCTIONAPP_NAME: mylogicapp7007   # set this to your function app name on Azure
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'logicapp.zip'       # set this to the path to your function app project, defaults to the repository root
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write #This is required for requesting the JWT
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+      - name: zip the logic app
+        run: zip -r logicapp.zip . -x ".git/*" ".github/*" "README.md"
+
+      - name: Load settings from local.settings.json
+        id: load-settings
+        run: |
+          settings=$(cat local.settings.json)
+          echo "SETTINGS=$settings" >> $GITHUB_ENV
+   
+      - name: Set Logic App application settings
+        run: |
+          settings=$(jq -r .Values <<< ${{ env.SETTINGS }})
+          for key in $(jq -r 'keys[]' <<< $settings); do
+            value=$(jq -r --arg key "$key" '.[$key]' <<< $settings)
+            az webapp config appsettings set --name <logic-app-name> --resource-group <resource-group> --settings "$key=$value"
+          done
+   
+      - name: Deploy Logic App
+        run: |
+          az logicapp deployment source config-zip --resource-group <resource-group> --name <logic-app-name> --src LogicApp
