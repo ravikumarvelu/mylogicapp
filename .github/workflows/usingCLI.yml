@@ -1,4 +1,4 @@
-name: Deploy PowerShell project to Azure Function App
+name: Deploy Using CLI
 
 on:
   push:
@@ -22,12 +22,8 @@ jobs:
       - name: Load settings from local.settings.json
         id: load-settings
         run: |
-          settings=$(cat workflow-designtime/local.settings.json)
-          echo "SETTINGS=$settings" >> $GITHUB_ENV
-   
-      - name: Set Logic App application settings
-        run: |
-          settings=$(jq -r .Values <<< ${{ env.SETTINGS }})
+          evalues=$(cat workflow-designtime/local.settings.json)
+          settings=$(jq -r .Values <<< ${{ evalues }})
           for key in $(jq -r 'keys[]' <<< $settings); do
             value=$(jq -r --arg key "$key" '.[$key]' <<< $settings)
             az webapp config appsettings set --name mylogicapp7007 --resource-group AZ-GROUP --settings "$key=$value"
