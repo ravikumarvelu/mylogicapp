@@ -39,5 +39,6 @@ jobs:
       - uses: azure/appservice-settings@v1
         with:
           app-name: 'mylogicapp7007'
-          app-settings-json: '[{ "name": "SCM_DO_BUILD_DURING_DEPLOYMENT", "value": "1" }]'
+          mask-inputs: false
+          app-settings-json: '[{ "SCM_DO_BUILD_DURING_DEPLOYMENT": "123" },{"ravi":"name"}]'
         id: settings
