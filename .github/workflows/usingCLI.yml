@@ -23,7 +23,7 @@ jobs:
         id: load-settings
         run: |
           evalues=$(cat workflow-designtime/local.settings.json)
-          settings=$(jq -r .Values <<< ${{ evalues }})
+          settings=$(jq -r .Values <<< ${evalues} )
           for key in $(jq -r 'keys[]' <<< $settings); do
             value=$(jq -r --arg key "$key" '.[$key]' <<< $settings)
             az webapp config appsettings set --name mylogicapp7007 --resource-group AZ-GROUP --settings "$key=$value"
