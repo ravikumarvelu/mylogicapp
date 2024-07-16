@@ -2,5 +2,9 @@
   "azureFunctions.deploySubpath": ".",
   "azureFunctions.projectLanguage": "JavaScript",
   "azureFunctions.projectRuntime": "~4",
-  "debug.internalConsoleOptions": "neverOpen"
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureLogicAppsStandard.deploySubpath": "workflow-designtime",
+  "azureLogicAppsStandard.projectLanguage": "JavaScript",
+  "azureLogicAppsStandard.projectRuntime": "~4",
+  "azureFunctions.suppressProject": true
 }
