@@ -51,4 +51,10 @@ jobs:
           # slot-name: 'Production'
           package: logicapp.zip
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-          
+
+      - uses: azure/appservice-settings@v1
+        with:
+          app-name: 'mylogicapp7007'
+          mask-inputs: false
+          app-settings-json: '[{ "name": "SCM_DO_BUILD_DURING_DEPLOYMENT", "value": "1", "slotSetting": false }]'
+        id: settings
