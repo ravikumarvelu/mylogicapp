@@ -40,5 +40,5 @@ jobs:
         with:
           app-name: 'mylogicapp7007'
           mask-inputs: false
-          app-settings-json: '[{ "SCM_DO_BUILD_DURING_DEPLOYMENT": "123" },{"ravi":"name"}]'
+          app-settings-json: ${{vars.CONFIG}}
         id: settings
