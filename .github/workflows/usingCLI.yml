@@ -22,7 +22,7 @@ jobs:
       - name: Load settings from local.settings.json
         id: load-settings
         run: |
-          settings=$(cat local.settings.json)
+          settings=$(cat workflow-designtime/local.settings.json)
           echo "SETTINGS=$settings" >> $GITHUB_ENV
    
       - name: Set Logic App application settings
@@ -30,9 +30,9 @@ jobs:
           settings=$(jq -r .Values <<< ${{ env.SETTINGS }})
           for key in $(jq -r 'keys[]' <<< $settings); do
             value=$(jq -r --arg key "$key" '.[$key]' <<< $settings)
-            az webapp config appsettings set --name <logic-app-name> --resource-group <resource-group> --settings "$key=$value"
+            az webapp config appsettings set --name mylogicapp7007 --resource-group AZ-GROUP --settings "$key=$value"
           done
    
       - name: Deploy Logic App
         run: |
-          az logicapp deployment source config-zip --resource-group <resource-group> --name <logic-app-name> --src LogicApp
+          az logicapp deployment source config-zip --resource-group AZ-GROUP --name mylogicapp7007 --src LogicApp
