@@ -19,12 +19,12 @@ jobs:
       - name: zip the logic app
         run: zip -r logicapp.zip . -x ".git/*" ".github/*" "README.md"
         
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.CLIENT_ID }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          subscription-id: ${{ secrets.SUB_ID }}
+      # - name: Login to Azure
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.CLIENT_ID }}
+      #     tenant-id: ${{ secrets.TENANT_ID }}
+      #     subscription-id: ${{ secrets.SUB_ID }}
     
       - name: 'Run Azure Functions Action'
         continue-on-error: true
@@ -34,7 +34,7 @@ jobs:
           app-name: 'mylogicapp7007'
           # slot-name: 'Production'
           package: logicapp.zip
-          # publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
       - uses: azure/appservice-settings@v1
         with:
