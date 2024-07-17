@@ -3,6 +3,7 @@ name: Deploy PowerShell project to Azure Function App
 on:
   push:
     branches: ["main"]
+  
 
 env:
   AZURE_FUNCTIONAPP_NAME: mylogicapp7007   # set this to your function app name on Azure
