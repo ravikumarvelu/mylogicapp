@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
       - name: zip the logic app
         run: |
+          rm -rf parameters.json connections.json
           zip -r logicapp.zip . 
         
       # - name: Login to Azure
